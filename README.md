@@ -1,4 +1,4 @@
-# RubyTest CLI
+# Ruby Test CLI
 
 Command line interface for running tests for RubyTest-based
 test frameworks.
@@ -20,6 +20,7 @@ over and over, so to simply the `rubytest` command supports
 preconfigurations. To use, add an `etc/test.rb` file to a project
 and add `Test.run` entries.
 
+```ruby
     Test.run do |r|
       r.loadpath 'lib'
       r.test_files << 'test/*_test.rb'
