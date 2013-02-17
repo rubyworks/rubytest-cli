@@ -1,0 +1,8 @@
+---
+- rubytest 0.7.0+
+- ansi
+- fire    (build)
+- detroit (build)
+- qed     (test)
+- ae      (test)
+

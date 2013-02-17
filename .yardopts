@@ -1,0 +1,10 @@
+--title "Ruby Test CLI"
+--readme README.md
+--output-dir doc
+--protected
+--private
+lib
+-
+*.txt
+*.md
+

@@ -1,0 +1,66 @@
+---
+revision: 2013
+type: ruby
+sources:
+- var
+authors:
+- name: trans
+  email: transfire@gmail.com
+organizations: []
+requirements:
+- version: 0.7.0+
+  name: rubytest
+- name: ansi
+- groups:
+  - build
+  development: true
+  name: fire
+- groups:
+  - build
+  development: true
+  name: detroit
+- groups:
+  - test
+  development: true
+  name: qed
+- groups:
+  - test
+  development: true
+  name: ae
+conflicts: []
+alternatives: []
+resources:
+- type: home
+  uri: http://rubyworks.github.com/rubytest-cli
+  label: Homepage
+- type: code
+  uri: http://github.com/rubyworks/rubytest-cli
+  label: Source Code
+- type: bugs
+  uri: http://github.com/rubyworks/rubytest-cli/issues
+  label: Issue Tracker
+- type: mail
+  uri: http://groups.google.com/group/rubyworks-mailinglist
+  label: Mailing List
+repositories:
+- name: upstream
+  scm: git
+  uri: git@github.com:rubyworks/rubytest-cli.git
+categories: []
+copyrights:
+- holder: RubyWorks
+  year: '2011'
+  license: BSD-2-Clause
+customs: []
+paths:
+  lib:
+  - lib
+created: '2011-07-23'
+summary: CLI for Ruby Universal Test Harness
+title: Ruby Test CLI
+version: 0.1.0
+name: rubytest-cli
+description: ! 'Rubytest CLI is a command-line interface for running tests for
+
+  Rubytest-based test frameworks.'
+date: '2013-02-17'
