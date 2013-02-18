@@ -5,8 +5,8 @@ test frameworks.
 
 [Website](http://rubyworks.github.com/rubytest-cli) /
 [Support](http://github.com/rubyworks/rubytest-cli/issues) /
-[Development](http://github.com/rubyworks/rubytest-cli) : :
-[![Build Status](https://secure.travis-ci.org/rubyworks/rubytest.png)](http://travis-ci.org/rubyworks/rubytest-cli) /
+[Development](http://github.com/rubyworks/rubytest-cli) &nbsp; &nbsp;
+[![Build Status](https://secure.travis-ci.org/rubyworks/rubytest.png)](http://travis-ci.org/rubyworks/rubytest-cli)
 [![Gem Version](https://badge.fury.io/rb/rubytest.png)](http://badge.fury.io/rb/rubytest-cli)
 
 
