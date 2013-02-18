@@ -63,4 +63,4 @@ name: rubytest-cli
 description: ! 'Rubytest CLI is a command-line interface for running tests for
 
   Rubytest-based test frameworks.'
-date: '2013-02-17'
+date: '2013-02-18'
