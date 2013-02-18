@@ -39,9 +39,9 @@ might add a `.opts` file with the entry:
       -r rspecial
       spec/spec_*.rb
 
-That will work in many cases, but to make things <u>solid</u> Ruby Test
-supports default pre-configuration files. To use, add an `etc/test.rb` file
-to a project and add `Test.run` (or the alias `Test.configure`) entries.
+That will work in many cases, but to make things *solid* Ruby Test CLI
+supports a default configuration file. To utilize, add an `etc/test.rb` file
+to a project and add `Test.run` (or the alias `Test.configure`) entries to it.
 
 ```ruby
     Test.run do |r|
@@ -65,13 +65,13 @@ to a project and add `Test.run` (or the alias `Test.configure`) entries.
     end
 ```
 
-Now when `rubytest` is used the first configuration will apply. To use
+Now when rubytest is used, the first configuration will apply. To use
 the 'coverage' configuration use `-p/--profile` option.
 
     $ rubytest -p coverage
 
-In this manner your project can have any number of different test
-configurations, and it is easy to select between them.
+In this manner a project can have any number of different test configurations,
+and it is easy to select between them.
 
 Note that the above example could have used `Test.configure` instead
 of `Test.run`. They do the same thing. But do not use `Test.run!` because
@@ -82,8 +82,7 @@ is nice for Rails projects. But if you prefer a file in the project's root
 then either `Testfile` or `.test` can be also be used instead. All of these
 locations are supported simply because no one configuration convention has 
 taken a solid hold in the Ruby community. However, we highly recommend using
-`etc/test.rb`. In the end that seems like the best overall convention
-(and beleive me, I've analyized the hell out of every option!).
+`etc/test.rb`. In the end that seems like the best overall convention.
 
 
 ## Copyrights
