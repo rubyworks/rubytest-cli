@@ -33,14 +33,17 @@ module Test
     #
     # @return nothing
     def run(argv=nil)
+      #require_dotopts
       argv = (argv || ARGV.dup)
-
       options.parse!(argv)
 
       @config[:files] = argv unless argv.empty?
 
-      test_config = Config.new(@config)
+      load_config
+
+      test_config = Test.configuration(profile)
       test_config.apply_environment_defaults
+      test_config.apply(@config)
 
       Test.run!(test_config)
 
@@ -53,6 +56,14 @@ module Test
       #  $stderr.puts('ERROR: ' + error.to_s)
       #  exit -1
       #end
+    end
+
+    # TODO: Not sure if this should be used or not.
+    def require_dotopts
+      begin
+        require 'dotopts'
+      rescue LoadError
+      end
     end
 
     # Setup OptionsParser instance.
@@ -166,11 +177,14 @@ module Test
     # @deprecated Planned for deprecation in April 2013.
     def load_config
       file = config_file
-      if !file
-        #file = Dir.glob(File.join(root, GLOB_CONFIG)).first
-        file = Dir.glob(GLOB_CONFIG).first
+      unless file
+        if chdir
+          file = Dir.glob(File.join(chdir, GLOB_CONFIG)).first
+        else
+          file = Dir.glob(GLOB_CONFIG).first
+        end
       end
-      load file
+      load file if file
     end
 
     # Find traditional configuration file.
