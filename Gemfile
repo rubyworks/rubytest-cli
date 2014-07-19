@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rubytest-core", "> 0.8.0"
+gem "rubytest-core", ">= 0.8.0"
 gem "ansi"
 
 group :build do

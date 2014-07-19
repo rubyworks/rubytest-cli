@@ -9,7 +9,7 @@ authors:
   email: transfire@gmail.com
 organizations: []
 requirements:
-- version: '> 0.8.0'
+- version: '>= 0.8.0'
   name: rubytest-core
 - version: '>= 0'
   name: ansi
