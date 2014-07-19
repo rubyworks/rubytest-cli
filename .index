@@ -10,7 +10,7 @@ authors:
 organizations: []
 requirements:
 - version: '>= 0.8.0'
-  name: rubytest-core
+  name: rubytest
 - version: '>= 0'
   name: ansi
 conflicts: []
