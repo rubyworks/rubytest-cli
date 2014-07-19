@@ -43,7 +43,7 @@ paths:
   - lib
 name: rubytest-cli
 title: Rubytest CLI
-version: 0.1.0
+version: 0.2.0
 summary: Command line interface for Ruby Universal Test Harness
 description: Rubytest CLI is a command-line interface for running tests for Rubytest-based
   test frameworks.

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>rubytest(1) - ruby test via rubytest api</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#OVERVIEW">OVERVIEW</a>
+    <a href="#USAGE">USAGE</a>
+    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#RESOURCES">RESOURCES</a>
+    <a href="#COPYRIGHT">COPYRIGHT</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>rubytest(1)</li>
+    <li class='tc'></li>
+    <li class='tr'>rubytest(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>rubytest</code> - <span class="man-whatis">ruby test via rubytest api</span>
+</p>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>The rubytest command is a command line interface for running tests
+for RubyTest-based test frameworks.</p>
+
+<h2 id="OVERVIEW">OVERVIEW</h2>
+
+<p>The rubytest command-line tool follows many of the usual conventions
+so it's use is farily straightforward. The <code>-h/--help</code> option is
+available to detail all its options. Here is a basic example of usage.</p>
+
+<pre><code>$ rubytest -Ilib test/*_test.rb
+</code></pre>
+
+<p>This would add <code>lib</code> to Ruby's $LOAD_PATH and then load all the
+test files matching the <code>test/*_test.rb</code> glob.</p>
+
+<p>When running tests, you need to be sure to load in your test framework
+or your framework's Ruby Test adapter. This is usually done via a helper
+script in the test files, but might also be done via command line options,
+e.g.</p>
+
+<pre><code>$ rubytest -r lemon -r ae test/test_*.rb
+</code></pre>
+
+<p>Of course, it can become tedious having to type such a long command over and over.
+This can be dealt with via a configuration file. To utilize, add an <code>etc/test.rb</code>
+file to a project and add <code>Test.run</code> (an alias for <code>Test.configure</code>) entries to it.</p>
+
+<pre><code>Test.run do |r|
+  r.loadpath 'lib'
+  r.test_files &lt;&lt; 'test/*_test.rb'
+end
+
+Test.run 'coverage' do |r|
+  r.loadpath 'lib'
+  r.test_files &lt;&lt; 'test/*_test.rb'
+  r.before do
+    require 'simplecov'
+    Simplecov.setup do |s|
+      s.filter 'test/'
+      s.command_name File.basename($0)
+      s.coverage_dir 'log/coverage'    
+    end
+    # to ensure proper coverage
+    require 'myapp'
+  end
+end
+</code></pre>
+
+<p>Now when rubytest is used, the first configuration will apply. To use
+the 'coverage' configuration use <code>-p/--profile</code> option.</p>
+
+<pre><code>$ rubytest -p coverage
+</code></pre>
+
+<p>In this manner a project can have any number of different test configurations,
+and it is easy to select between them.</p>
+
+<p>Note that the above example could have used <code>Test.configure</code> instead
+of <code>Test.run</code>. They do the same thing. But do not use <code>Test.run!</code> because
+that will cause testing to be run immediately.</p>
+
+<p>The configuration file can be in the <code>config</code> directory instead of <code>etc</code>, which
+is nice for Rails projects. But if you prefer a file in the project's root
+then either <code>Testfile</code> or <code>.test</code> can be also be used instead. All of these
+locations are supported simply because no one configuration convention has
+taken a solid hold in the Ruby community. However, we highly recommend using
+<code>etc/test.rb</code>. In the end that seems like the best overall convention.</p>
+
+<h2 id="USAGE">USAGE</h2>
+
+<pre><code>rubytest [options] [files ...]
+</code></pre>
+
+<h2 id="OPTIONS">OPTIONS</h2>
+
+<ul>
+<li><p><code>-p</code> <code>--profile &lt;NAME></code>
+Use configuration profile.</p></li>
+<li><p><code>-f</code> <code>--format &lt;NAME></code>
+Report format.</p></li>
+<li><p><code>y</code> <code>--tapy</code>
+Shortcut for -f tapy.</p></li>
+<li><p><code>-j</code> <code>--tapj</code>
+Shortcut for -f tapj.</p></li>
+<li><p><code>-t</code> <code>--tag &lt;TAG></code>
+Select tests by tag.</p></li>
+<li><p><code>-u</code> <code>--unit &lt;TAG></code>
+Select tests by software unit.</p></li>
+<li><p><code>-m</code> <code>--match &lt;TEXT></code>
+Select tests by description.</p></li>
+<li><p><code>-A</code> <code>--autopath</code>
+Automatically add paths to $LOAD_PATH.</p></li>
+<li><p><code>-I</code> <code>--loadpath &lt;PATH></code>
+Add given path to $LOAD_PATH.</p></li>
+<li><p><code>-C</code> <code>--chdir &lt;DIR></code>
+Change directory before running tests.</p></li>
+<li><p><code>-R</code> <code>--chroot</code>
+Change to project root directory before running tests.</p></li>
+<li><p><code>-r</code> <code>--require &lt;FILE></code>
+Require file.</p></li>
+<li><p><code>-c</code> <code>--config &lt;FILE></code>
+Use alternate config file.</p></li>
+<li><p><code>-V</code> <code>--verbose</code>
+Provide extra detail in reports.</p></li>
+<li><p><code>--[no-]ansi</code>
+Turn on/off ANSI colors.</p></li>
+<li><p><code>--debug</code>
+Turn on debugging mode.</p></li>
+<li><p><code>--about</code>
+Display information about rubytest.</p></li>
+<li><p><code>--version</code>
+Display rubytest version.</p></li>
+<li><p><code>-h</code> <code>--help</code>
+Display this help message.</p></li>
+</ul>
+
+
+<h2 id="RESOURCES">RESOURCES</h2>
+
+<ul>
+<li><a href="http://rubyworks.github.com/rubytest-cli">Website</a> /</li>
+<li><a href="http://github.com/rubyworks/rubytest-cli/issues">Support</a> /</li>
+<li><a href="http://github.com/rubyworks/rubytest-cli">Development</a> &nbsp; &nbsp;</li>
+<li><a href="http://travis-ci.org/rubyworks/rubytest-cli"><img src="https://secure.travis-ci.org/rubyworks/rubytest.png" alt="Build Status" /></a></li>
+<li><a href="http://badge.fury.io/rb/rubytest-cli"><img src="https://badge.fury.io/rb/rubytest.png" alt="Gem Version" /></a></li>
+</ul>
+
+
+<h2 id="COPYRIGHT">COPYRIGHT</h2>
+
+<p>Rubytest is copyrighted open-source software.</p>
+
+<pre><code>Copyright (c) 2013 Rubyworks. All rights reserved.
+</code></pre>
+
+<p>It is redistributable and modifiable in accordance with the terms of the
+BSD-2-Clause license.</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><span class="man-ref">ruby<span class="s">(1)</span></span></p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>July 2014</li>
+    <li class='tr'>rubytest(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
