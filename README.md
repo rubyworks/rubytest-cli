@@ -1,13 +1,20 @@
-# Ruby Test CLI
-
-Command line interface for running tests for RubyTest-based
-test frameworks.
+# Rubytest CLI
 
 [Website](http://rubyworks.github.com/rubytest-cli) /
 [Support](http://github.com/rubyworks/rubytest-cli/issues) /
-[Development](http://github.com/rubyworks/rubytest-cli) &nbsp; &nbsp;
-[![Build Status](https://secure.travis-ci.org/rubyworks/rubytest.png)](http://travis-ci.org/rubyworks/rubytest-cli)
-[![Gem Version](https://badge.fury.io/rb/rubytest.png)](http://badge.fury.io/rb/rubytest-cli)
+[Development](http://github.com/rubyworks/rubytest-cli)
+
+<b>Command line interface for running tests for Rubytest-based test frameworks.</b>
+
+
+## Status
+
+[![Gem Version](http://img.shields.io/gem/v/rubytest-cli.svg?style=flat)](http://rubygems.org/gem/rubytest-cli)
+[![Build Status](http://img.shields.io/travis/rubyworks/rubytest-cli.svg?style=flat)](http://travis-ci.org/rubyworks/rubytest-cli)
+[![Fork Me](http://img.shields.io/badge/scm-github-blue.svg?style=flat)](http://github.com/rubyworks/rubytest-cli)
+[![Report Issue](http://img.shields.io/github/issues/rubyworks/rubytest-cli.svg?style=flat)](http://github.com/rubyworks/rubytest-cli/issues)
+[![Gittip](http://img.shields.io/badge/gittip-$1/wk-green.svg?style=flat)](https://www.gittip.com/on/github/rubyworks/)
+[![Flattr Me](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/324911/Rubyworks-Ruby-Development-Fund)
 
 
 ## Usage
